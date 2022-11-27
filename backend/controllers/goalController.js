@@ -1,6 +1,4 @@
-const expressAsyncHandler = require("express-async-handler");
-
-const asyncHandler = require(expressAsyncHandler)
+const asyncHandler = require("express-async-handler");
 
 //get
 const getGoals =  asyncHandler (async (req, res) => {
