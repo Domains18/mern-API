@@ -48,7 +48,20 @@ const registerUser = asyncHandler (async(req, res) =>{
 //acces pubic
 
 const loginUser = asyncHandler (async( req, res)=>{
-    res.json({message: 'login user'})
+    const {email, password } = req.body;
+    //check ths user
+    const user = await User.findOne({email});
+    if(user && (await bycrpt.compare(password, user.password))){
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email
+        });
+    } else{
+        res.status(400)
+        throw new Error('Access Denied, Invalid credentials')
+    }
+    // res.json({message: 'login user'})
 })
 // get user info
 // acces public
