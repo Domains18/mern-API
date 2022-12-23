@@ -12,7 +12,7 @@ const registerUser = asyncHandler (async(req, res) =>{
 
     if( !name || !email || !password){
         res.status(400);
-        throw new Error('Acces dened, bad authentication')
+        throw new Error('Access denied, bad authentication')
     }
 
     //check if user exists
@@ -40,7 +40,7 @@ const registerUser = asyncHandler (async(req, res) =>{
         
     } else{
         res.status(400)
-        throw new Error ('Invalid User Datta')
+        throw new Error ('Invalid User Data')
     }
     // res.json({message: 'register user'})
 })
