@@ -8,7 +8,7 @@ const port = process.env.PORT || 8000;
 
 
 //connect database
-// connectDB();
+connectDB();
 
 const app = express();
 
