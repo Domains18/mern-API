@@ -16,7 +16,7 @@ const registerUser = asyncHandler (async(req, res) =>{
     }
 
     //check if user exists
-    const userValidation = await User.findOne({emails});
+    const userValidation = await User.findOne({email});
     if(userValidation){
         res.status(400);
         throw new Error('User already exists')
@@ -26,8 +26,23 @@ const registerUser = asyncHandler (async(req, res) =>{
     const hashedPassword = await bycrpt.hash(password, salt);
 
     //create user
-    
-    res.json({message: 'register user'})
+    const user = await User.create({
+        name, 
+        email,
+        password: hashedPassword
+    });
+    if(user){
+        res.status(201).json({
+            _id: user.id,
+            name: user.name,
+            email: user.email
+        })
+        
+    } else{
+        res.status(400)
+        throw new Error ('Invalid User Datta')
+    }
+    // res.json({message: 'register user'})
 })
 // auth user
 //acces pubic
