@@ -46,7 +46,7 @@ const registerUser = asyncHandler (async(req, res) =>{
     // res.json({message: 'register user'})
 })
 // auth user
-//acces pubic
+//acces public
 
 const loginUser = asyncHandler (async( req, res)=>{
     const {email, password } = req.body;
@@ -65,9 +65,9 @@ const loginUser = asyncHandler (async( req, res)=>{
     // res.json({message: 'login user'})
 })
 // get user info
-// acces public
+// access private
 const aboutMe = asyncHandler (async (req, res)=>{
-    res.json({message: 'about me'})
+    res.json({message: 'about me'});
 });
 
 
