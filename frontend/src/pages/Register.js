@@ -14,8 +14,14 @@ function Register() {
 
     const { name, email, password, password2 } = formData
 
-    const onChange = () => {
-        console.log('onChange')
+    const onChange = (e) => {
+        setFormData((prevState)=>({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+    const onSubmit = (e)=>{
+        e.preventDefault();
     }
     return (
         <>
@@ -26,8 +32,8 @@ function Register() {
                 <p>Create an Account</p>
             </section>
             <section className="form">
-                <div className="form-group">
-                    <form>
+                <form onSubmit={onSubmit}>
+                    <div className="form-group">
                         <input type="text"
                             className='form-control'
                             id='name'
@@ -36,10 +42,18 @@ function Register() {
                             onChange={onChange}
                             placeholder="Enter Your Name"
                         />
-                    </form>
-                </div>
-                <div className="form-group">
-                    <form>
+                    </div>
+                    <div className="form-group">
+                        <input type="text"
+                            className='form-control'
+                            id='email'
+                            name='email'
+                            value={email}
+                            onChange={onChange}
+                            placeholder="Enter Your Email"
+                        />
+                    </div>
+                    <div className="form-group">
                         <input
                             type="password"
                             className='form-control'
@@ -49,10 +63,8 @@ function Register() {
                             onChange={onChange}
                             placeholder="Enter Your Password"
                         />
-                    </form>
-                </div>
-                <div className="form-group">
-                    <form>
+                    </div>
+                    <div className="form-group">
                         <input
                             type="password2"
                             className='form-control'
@@ -62,8 +74,11 @@ function Register() {
                             onChange={onChange}
                             placeholder="Confirm Your Password"
                         />
-                    </form>
-                </div>
+                    </div>
+                    <div className="form-group">
+                        <button type="submit" className='btn btn-block'>Submit</button>
+                    </div>
+                </form>
             </section>
         </>
     )
