@@ -19,30 +19,30 @@ function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isloading, isError, isSuccess, message} = useSelector((state)=> state.auth);
-    
+    const { user, isloading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
     //useEffect
-    useEffect(()=>{
-        if(isError){
+    useEffect(() => {
+        if (isError) {
             toast.error(message);
         }
-        if(isSuccess || user){
+        if (isSuccess || user) {
             navigate('/');
         }
         dispatch(reset())
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
     const onChange = (e) => {
-        setFormData((prevState)=>({
+        setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
     }
-    const onSubmit = (e)=>{
+    const onSubmit = (e) => {
         e.preventDefault();
 
         //check for password mismatch
-        if( password !== password2){
+        if (password !== password2) {
             toast.error('Password Mismatch');
 
         } else {

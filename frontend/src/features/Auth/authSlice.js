@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService'
 //getting user from local storage
 const user = JSON.parse(localStorage.getItem('user'));
@@ -13,10 +13,10 @@ const initialState = {
 }
 
 //register user
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) =>{
-    try{
+export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+    try {
         return await authService.register(user)
-    }catch(error){
+    } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
         return thunkAPI.rejectWithValue(message);
     }
@@ -25,25 +25,25 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers:{
-        reset: (state) =>{
+    reducers: {
+        reset: (state) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = false
             state.message = ''
         }
     },
-    extraReducers: (builder) =>{
+    extraReducers: (builder) => {
         builder
-            .addCase(register.pending, (state)=>{
+            .addCase(register.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(register.fulfilled, (state, action)=>{
+            .addCase(register.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.user = action.payload
             })
-            .addCase(register.rejected, (state, action)=>{
+            .addCase(register.rejected, (state, action) => {
                 state.isError = true
                 state.isLoading = false
                 state.message = action.payload

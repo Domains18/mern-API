@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <div className="container">
-          <Header/>
+          <Header />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
@@ -18,7 +18,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }
