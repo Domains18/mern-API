@@ -12,6 +12,9 @@ const initialState = {
     message: ''
 }
 
+//register user
+
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
