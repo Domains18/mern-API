@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { FaSignInAlt, FaUser } from 'react-icons/fa'
+import { useState } from 'react';
+import { FaSignInAlt } from 'react-icons/fa'
 
 
 
@@ -16,7 +16,7 @@ function Register() {
         setFormData((prevState)=>({
             ...prevState,
             [e.target.name]: e.target.value
-        }))
+        }));
     }
     const onSubmit = (e)=>{
         e.preventDefault();
@@ -58,7 +58,7 @@ function Register() {
                 </form>
             </section>
         </>
-    )
+    );
 }
 
 export default Register
