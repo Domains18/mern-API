@@ -22,7 +22,7 @@ function Dashboard() {
     <>
       <section className='heading'>
         <h1> hello { user  && user.name }</h1>
-        <p> Goals Dashboard</p>
+        <p>Your Dashboard</p>
       </section>
       <GoalForm/>
     </>

@@ -11,7 +11,7 @@ const getGoals =  asyncHandler (async (req, res) => {
 
 })
 
-//set
+//create
 const setGoal = asyncHandler (async (req, res) =>{
     if(!req.body.text){
         res.status(400)
