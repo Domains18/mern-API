@@ -8,7 +8,7 @@ const createGoal = async (goalData, token) =>{
 
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
         }
     }
     const response = await axios.post( 'http://localhost:5000/api/goals/', goalData, config);
