@@ -11,10 +11,10 @@ const initialState = {
 
 // create new Goal
 
-export const createGoal = createAsyncThunk('/goals/create', async (goalData, thunkApi) =>{
+export const createGoal = createAsyncThunk('/goals/create', async (goalData, thunkApi) => {
     try {
         const token = thunkApi.getState().auth.user.token
-        return await goalService.createGoal( goalData, token)
+        return await goalService.createGoal(goalData, token)
 
 
     } catch (error) {
@@ -22,7 +22,22 @@ export const createGoal = createAsyncThunk('/goals/create', async (goalData, thu
 
         return thunkApi.rejectWithValue(message)
     }
-})
+});
+
+
+// get user goals
+
+export const getGoals = createAsyncThunk('goals/getAll', async (_, thunkApi) => {
+    try {
+        const token = thunkApi.getState().auth.user.token
+        return await goalService.getGoals(token);
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+
+        return thunkApi.rejectWithValue(message);
+
+    }
+});
 
 
 export const goalSlice = createSlice({
@@ -31,20 +46,36 @@ export const goalSlice = createSlice({
     reducers: {
         reset: (state) => initialState
     },
-    extraReducers: (builder)=>{
+    extraReducers: (builder) => {
         builder
-            .addCase(createGoal.pending, (state)=>{
+            .addCase(createGoal.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(createGoal.fulfilled, (state, action)=>{
+            .addCase(createGoal.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.isSuccess= true
+                state.isSuccess = true
                 state.goals.push(action.payload)
             })
-            .addCase(createGoal.rejected, (state, action)=>{
+            .addCase(createGoal.rejected, (state, action) => {
                 state.isError = true
                 state.isLoading = false
-                state.isSuccess= false
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            
+            // getGoal
+            .addCase(getGoals.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getGoals.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.goals = action.payload
+            })
+            .addCase(getGoals.rejected, (state, action) => {
+                state.isError = true
+                state.isLoading = false
+                state.isSuccess = false
                 state.message = action.payload
             })
     }
