@@ -4,16 +4,16 @@ const asyncHandler = require("express-async-handler");
 const Goal = require('../Models/goalsModel');
 const User = require('../Models/userModels');
 //get
-const getGoals =  asyncHandler (async (req, res) => {
+const getGoals = asyncHandler(async (req, res) => {
 
-    const goals = await Goal.find({ user: req.user.id});
+    const goals = await Goal.find({ user: req.user.id });
     res.status(200).json(goals)
 
 })
 
 //create
-const setGoal = asyncHandler (async (req, res) =>{
-    if(!req.body.text){
+const setGoal = asyncHandler(async (req, res) => {
+    if (!req.body.text) {
         res.status(400)
         throw new Error('Please, Add Text');
     }
@@ -25,17 +25,17 @@ const setGoal = asyncHandler (async (req, res) =>{
 })
 
 //update 
-const updateGoal = asyncHandler (async (req, res) => {
+const updateGoal = asyncHandler(async (req, res) => {
     const goal = await Goal.findById(req.params.id)
-    if(!goal){
+    if (!goal) {
         res.status(400)
         throw new Error('Not Found!')
     }
-    if(!req.user){
+    if (!req.user) {
         res.status(400)
         throw new Error('User Not Found!')
     }
-    if(goal.user.toString() !== req.user.id){
+    if (goal.user.toString() !== req.user.id) {
         res.status(400)
         throw new Error('Not Authorized!')
     }
@@ -47,24 +47,24 @@ const updateGoal = asyncHandler (async (req, res) => {
 
 
 // delete
-const deleteGoal = asyncHandler (async (req, res) =>{
+const deleteGoal = asyncHandler(async (req, res) => {
     const goal = await Goal.findById(req.params.id)
-    
-    if(!goal){
+
+    if (!goal) {
         res.status(400)
         throw new Error('Goal Not found')
     }
 
-    if (!req.user){
+    if (!req.user) {
         res.status(401);
         throw new Error('user not found')
     }
-    if (goal.user,toString() !== req.user.id){
+    if (goal.user, toString() !== req.user.id) {
         res.status(400)
         throw new Error('Access Denied, Unauthorized')
     }
     await goal.remove();
-    res.status(200).json({id: req.params.id})
+    res.status(200).json({ id: req.params.id })
 })
 module.exports = {
     getGoals,

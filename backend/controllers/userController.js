@@ -6,18 +6,18 @@ const User = require('../Models/userModels')
 
 
 
-const registerUser = asyncHandler (async(req, res) =>{
+const registerUser = asyncHandler(async (req, res) => {
     //require auth
-    const { name, email, password} = req.body;
+    const { name, email, password } = req.body;
 
-    if( !name || !email || !password){
+    if (!name || !email || !password) {
         res.status(400);
         throw new Error('Access denied, bad authentication')
     }
 
     //check if user exists
-    const userValidation = await User.findOne({email});
-    if(userValidation){
+    const userValidation = await User.findOne({ email });
+    if (userValidation) {
         res.status(400);
         throw new Error('User already exists')
     }
@@ -27,39 +27,39 @@ const registerUser = asyncHandler (async(req, res) =>{
 
     //create user
     const user = await User.create({
-        name, 
+        name,
         email,
         password: hashedPassword
     });
-    if(user){
+    if (user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
             token: generateToken(user._id)
         })
-        
-    } else{
+
+    } else {
         res.status(400)
-        throw new Error ('Invalid User Data')
+        throw new Error('Invalid User Data')
     }
     // res.json({message: 'register user'})
 })
 // auth user
 //acces public
 
-const loginUser = asyncHandler (async( req, res)=>{
-    const {email, password } = req.body;
+const loginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
     //check ths user
-    const user = await User.findOne({email});
-    if(user && (await bycrpt.compare(password, user.password))){
+    const user = await User.findOne({ email });
+    if (user && (await bycrpt.compare(password, user.password))) {
         res.json({
             _id: user.id,
             name: user.name,
             email: user.email
-            
+
         });
-    } else{
+    } else {
         res.status(400)
         throw new Error('Access Denied, Invalid credentials')
     }
@@ -67,7 +67,7 @@ const loginUser = asyncHandler (async( req, res)=>{
 })
 // get user info
 // access private
-const aboutMe = asyncHandler (async (req, res)=>{
+const aboutMe = asyncHandler(async (req, res) => {
     // res.json({message: 'about me'});
     res.status(200).json(req.user)
 });
@@ -75,7 +75,7 @@ const aboutMe = asyncHandler (async (req, res)=>{
 
 //generate token 
 
-const generateToken = (id) =>{
+const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
         expiresIn: '30d',
     })
