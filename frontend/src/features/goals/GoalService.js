@@ -4,23 +4,23 @@ import axios from 'axios'
 
 //create a new goal
 
-const createGoal = async (goalData, token) =>{
+const createGoal = async (goalData, token) => {
 
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         }
     }
-    const response = await axios.post( 'http://localhost:5000/api/goals/', goalData, config);
+    const response = await axios.post('http://localhost:5000/api/goals/', goalData, config);
     return response.data
 }
 
 //get service
 
-const getGoals = async (token) =>{
-    const config ={
+const getGoals = async (token) => {
+    const config = {
         headers: {
-            Authorization : `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
 
@@ -29,10 +29,10 @@ const getGoals = async (token) =>{
     return response;
 }
 //delete goals
-const deleteGoal = async(goalId, token)=>{
-    const config ={
+const deleteGoal = async (goalId, token) => {
+    const config = {
         headers: {
-            Authorization : `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
     const response = await axios.delete(`http://localhost:5000/api/goals?${goalId}`, config);

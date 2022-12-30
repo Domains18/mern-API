@@ -14,7 +14,7 @@ function Register() {
         password: '',
     });
 
-    const {email, password, } = formData
+    const { email, password, } = formData
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,24 +33,24 @@ function Register() {
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
     const onChange = (e) => {
-        setFormData((prevState)=>({
+        setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }));
     }
-    const onSubmit = (e)=>{
+    const onSubmit = (e) => {
         e.preventDefault();
-  
-        const userData ={
+
+        const userData = {
             email,
             password
         }
-        
+
         dispatch(loginUser(userData))
     }
 
-    if(isloading){
-        return <Spinner/>
+    if (isloading) {
+        return <Spinner />
     }
     return (
         <>

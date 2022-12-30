@@ -16,7 +16,7 @@ function Register() {
     });
 
     const { name, email, password, password2 } = formData
-    
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -55,8 +55,8 @@ function Register() {
 
             dispatch(register(userData))
         }
-        if(isloading){
-            return <Spinner/>
+        if (isloading) {
+            return <Spinner />
         }
     }
     return (

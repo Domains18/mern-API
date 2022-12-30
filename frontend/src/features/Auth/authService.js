@@ -1,5 +1,5 @@
 import axios from 'axios';
- 
+
 // const API_URL = 'api/users';
 
 //register users
@@ -24,7 +24,7 @@ const loginUser = async (userData) => {
     return response.data;
 }
 //logout
-const logOut = () =>{
+const logOut = () => {
     localStorage.removeItem('user')
 }
 

@@ -76,7 +76,7 @@ export const goalSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
-            
+
             // getGoal
             .addCase(getGoals.pending, (state) => {
                 state.isLoading = true
@@ -92,7 +92,7 @@ export const goalSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
-            
+
             //delete goal
             .addCase(deleteGoal.pending, (state) => {
                 state.isLoading = true
@@ -100,7 +100,7 @@ export const goalSlice = createSlice({
             .addCase(deleteGoal.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.goals = state.goals.filter((goal)=> goal.id !== action.payload.id)
+                state.goals = state.goals.filter((goal) => goal.id !== action.payload.id)
             })
             .addCase(deleteGoal.rejected, (state, action) => {
                 state.isError = true
